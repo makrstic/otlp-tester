@@ -24,7 +24,7 @@ otlp-tester send trace
 ```
 
 
-##Notes
+## Notes
 
 Tool is using OTLP/HTTP protocol to send sample telemetry signals.
 Some backends like Mimir or Prometheus may rename your metrics by adding _ratio suffix to the name you give.
