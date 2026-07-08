@@ -32,7 +32,7 @@ By default, http://localhost:4318 will be used to send all signals.`,
 			fmt.Println("\nMissing OTLP_EXPORTER_ENDPOINT. Using default: http://127.0.0.1:4318")
 			otlpEndpoint = "http://127.0.0.1:4318"
                 } else {
-			fmt.Println("OTLP_EXPORTER_ENDPOINT = ", otlpEndpoint, "\n")
+			fmt.Println("OTLP_EXPORTER_ENDPOINT = ", otlpEndpoint)
 		}
                 return nil
         },
