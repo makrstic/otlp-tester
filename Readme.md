@@ -23,5 +23,9 @@ otlp-tester send log
 otlp-tester send trace
 ```
 
-All metrics sent by the tool may get *_ratio* suffix set by Mimir/Prometheus.
+
+##Notes
+
+Tool is using OTLP/HTTP protocol to send sample telemetry signals.
+Some backends like Mimir or Prometheus may rename your metrics by adding _ratio suffix to the name you give.
 
