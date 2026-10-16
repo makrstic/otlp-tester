@@ -1,31 +1,23 @@
-/*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
-	"fmt"
-	"otlp-tester/models"
-	"otlp-tester/http"
-	"text/template"
-	"github.com/spf13/cobra"
 	"bytes"
+	"fmt"
 	"io"
-	"time"
+	"otlp-tester/http"
+	"otlp-tester/models"
 	"strconv"
+	"text/template"
+	"time"
+
+	"github.com/spf13/cobra"
 )
 
 // traceCmd represents the trace command
 var traceCmd = &cobra.Command{
 	Use:   "trace",
 	Short: "Send predefined sample trace to your OTLP endpoint",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Long:  `If you are sending sample traces to Grafana Cloud, you must use auth token and put it in GRAFANA_CLOUD_TOKEN environment variable.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		t := time.Now().UnixNano()
 		uidString := strconv.FormatInt(t, 10) + strconv.FormatInt(t, 10)
@@ -42,7 +34,7 @@ to quickly create a Cobra application.`,
 		tmpl.Execute(&output, trace)
 		fmt.Println(output.String())
 
-		res, err := http.PostRequest(otlpEndpoint + "/v1/traces", output)
+		res, err := http.PostRequest(otlpEndpoint+"/v1/traces", output, auth)
 		if err != nil {
 			fmt.Println(err)
 			return fmt.Errorf("Couldn't make API call. %w", err)
@@ -56,19 +48,9 @@ to quickly create a Cobra application.`,
 		return nil
 	},
 	SilenceErrors: true,
-	SilenceUsage: true, 
+	SilenceUsage:  true,
 }
 
 func init() {
 	sendCmd.AddCommand(traceCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// traceCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// traceCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

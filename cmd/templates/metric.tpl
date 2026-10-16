@@ -12,7 +12,6 @@
             {
               "name": "{{ .MetricName }}",
               "description": "A simple test metric",
-              "unit": "1",
               "gauge": {
                 "dataPoints": [
                   {

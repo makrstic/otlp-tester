@@ -1,16 +1,21 @@
 package models
 
 type Metric struct {
-        MetricName string
-        MetricValue int
-        CurrentTime int64
+	MetricName  string
+	MetricValue int
+	CurrentTime int64
 }
 
 type Log struct {
-        CurrentTime int64
+	CurrentTime int64
 }
 
 type Trace struct {
-        CurrentTime int64
-	TraceId string
+	CurrentTime int64
+	TraceId     string
+}
+
+type Auth struct {
+	AuthType string
+	Token    string
 }
